@@ -1,0 +1,39 @@
+version: '2'
+services:
+  web:
+    build: ./
+    ports:
+      - "8080:80"
+    volumes:
+      - "/Users/lixuehua/laravel/pmanager:/var/www/html/"
+      # - "./data/:/var/log/"
+      # - "./etc/php:/etc/php/7.1/apache2"
+      # - "./etc/apache2:/etc/apache2/sites-available"
+    container_name: my_container
+    links:
+      - "mysql:mysql"
+    networks:
+      - backend
+  mysql:
+    image: mysql
+    restart: always
+    ports:
+      - "8887:3306"
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: pmanager
+    container_name: my_db
+    networks:
+      - backend
+### Networks Setup ############################################
+networks:
+  backend:
+    driver: "bridge"
+### Volumes Setup #############################################
+volumes:
+  web:
+    driver: "local"
+
+  
