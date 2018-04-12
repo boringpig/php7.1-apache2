@@ -12,6 +12,7 @@ services:
     container_name: my_container
     links:
       - "mysql:mysql"
+      - "mongo:mongo"
     networks:
       - backend
   mysql:
@@ -24,7 +25,15 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: password
       MYSQL_DATABASE: pmanager
-    container_name: my_db
+    container_name: my_mysql
+    networks:
+      - backend
+  mongo:
+    image: mongo:3.6
+    restart: always
+    ports:
+      - "27018:27017"
+    container_name: my_mongodb
     networks:
       - backend
 ### Networks Setup ############################################
