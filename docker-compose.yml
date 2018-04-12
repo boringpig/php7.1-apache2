@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    build: ./
+    image: jefferylee/laravel
     ports:
       - "8080:80"
     volumes:
